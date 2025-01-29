@@ -70,11 +70,16 @@
                     <x-menu-separator />
                 @endif
 
-                <x-menu-item title="Hello" icon="o-sparkles" link="/" />
-                <x-menu-sub title="Settings" icon="o-cog-6-tooth">
-                    <x-menu-item title="Wifi" icon="o-wifi" link="####" />
-                    <x-menu-item title="Archives" icon="o-archive-box" link="####" />
+                <x-menu-item title="Dashboard" icon="o-home" link="/admin/dashboard" />
+                <x-menu-item title="Empresas" icon="o-building-office" link="/admin/empresas" />
+                <x-menu-item title="Eventos" icon="o-calendar" link="/admin/events" />
+                <x-menu-item title="Relatórios" icon="o-chart-bar" link="/admin/reports" />
+
+                <x-menu-sub title="Configurações" icon="o-cog-6-tooth">
+                    <x-menu-item title="Usuários" icon="o-users" link="/admin/users" />
+                    <x-menu-item title="Permissões" icon="o-lock-closed" link="/admin/permissions" />
                 </x-menu-sub>
+
             </x-menu>
         </x-slot:sidebar>
 

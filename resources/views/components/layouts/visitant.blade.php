@@ -70,11 +70,11 @@
                     <x-menu-separator />
                 @endif
 
-                <x-menu-item title="Hello" icon="o-sparkles" link="/" />
-                <x-menu-sub title="Settings" icon="o-cog-6-tooth">
-                    <x-menu-item title="Wifi" icon="o-wifi" link="####" />
-                    <x-menu-item title="Archives" icon="o-archive-box" link="####" />
-                </x-menu-sub>
+                <x-menu-item title="Meus Eventos" icon="o-calendar" link="/visitante/meus-eventos" />
+                <x-menu-item title="Ingressos" icon="o-ticket" link="/visitante/ingressos" />
+                <x-menu-item title="Histórico" icon="o-clock" link="/visitante/historico" />
+                <x-menu-item title="Perfil" icon="o-user" link="/visitante/perfil" />
+
             </x-menu>
         </x-slot:sidebar>
 

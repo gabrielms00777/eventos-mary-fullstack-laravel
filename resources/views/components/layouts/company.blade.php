@@ -70,11 +70,17 @@
                     <x-menu-separator />
                 @endif
 
-                <x-menu-item title="Hello" icon="o-sparkles" link="/" />
-                <x-menu-sub title="Settings" icon="o-cog-6-tooth">
-                    <x-menu-item title="Wifi" icon="o-wifi" link="####" />
-                    <x-menu-item title="Archives" icon="o-archive-box" link="####" />
+                <x-menu-item title="Dashboard" icon="o-home" link="/empresa/dashboard" />
+                <x-menu-item title="Meus Eventos" icon="o-calendar" link="/empresa/events" />
+                <x-menu-item title="Funcionários" icon="o-users" link="/empresa/staff" />
+                <x-menu-item title="Visitantes" icon="o-user-group" link="/empresa/visitantes" />
+                <x-menu-item title="Expositores" icon="o-presentation-chart-bar" link="/empresa/expositores" />
+
+                <x-menu-sub title="Configurações" icon="o-cog-6-tooth">
+                    <x-menu-item title="Perfil da Empresa" icon="o-building-office" link="/empresa/perfil" />
+                    <x-menu-item title="Gerenciar Acessos" icon="o-key" link="/empresa/gerenciar-acessos" />
                 </x-menu-sub>
+
             </x-menu>
         </x-slot:sidebar>
 
