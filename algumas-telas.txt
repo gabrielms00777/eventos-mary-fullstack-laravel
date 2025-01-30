@@ -1,0 +1,98 @@
+📌 Telas dos Funcionários (Área Restrita para Funcionários)
+Dashboard do Funcionário – Resumo das atividades, eventos que está vinculado e notificações importantes.
+Perfil do Funcionário – Dados pessoais, foto de perfil e possibilidade de alterar senha.
+Lista de Eventos – Eventos nos quais o funcionário está envolvido, com opção de visualizar detalhes.
+Lista de Visitantes – Caso tenha permissão, poderá ver e gerenciar visitantes do evento.
+Check-in de Visitantes – Tela para registrar a entrada dos visitantes no evento.
+Minhas Tarefas – Caso o evento tenha gestão de tarefas, uma tela para acompanhar suas atividades.
+Relatórios (Se aplicável) – Caso tenha permissão, pode acessar estatísticas e métricas do evento.
+📌 Telas dos Visitantes (Área do Participante/Visitante)
+Tela de Inscrição no Evento – Página para se registrar em um evento (nome, e-mail, empresa, etc.).
+Dashboard do Visitante – Resumo do evento em que está inscrito, QR Code de acesso e notificações.
+Meus Eventos – Listagem dos eventos que o visitante já participou ou está registrado.
+Check-in Digital – Tela para mostrar o QR Code de entrada e confirmar presença no evento.
+Certificados & Documentos – Caso o evento gere certificados, uma página para baixar esses documentos.
+
+===================================================
+
+ Telas Necessárias para a Empresa
+1️⃣ Painel da Empresa (Dashboard)
+Exibe estatísticas gerais sobre os eventos organizados.
+Mostra quantidade de eventos criados, participantes inscritos, eventos finalizados, etc.
+Exibe um gráfico de participação (se aplicável).
+2️⃣ Listagem de Eventos
+Mostra todos os eventos da empresa.
+Opções de pesquisa, filtro e paginação.
+Ações disponíveis:
+Visualizar evento
+Editar evento
+Cancelar evento
+3️⃣ Criação/Edição de Evento
+Mesmo formulário do Admin, mas sem algumas permissões especiais.
+Campos obrigatórios:
+Nome, data, local, capacidade, descrição e imagem.
+4️⃣ Listagem de Participantes
+Mostra os participantes inscritos no evento.
+Filtros por presença confirmada, cancelados, aguardando aprovação.
+Opções:
+Exportar lista de participantes
+Confirmar presença
+5️⃣ Página do Evento
+Exibe os detalhes completos de um evento específico.
+Lista de participantes confirmados e pendentes.
+Botão para baixar relatórios de presença.
+6️⃣ Convites e Divulgação
+Área para a empresa gerar um link de inscrição para participantes.
+Opção para enviar convites por e-mail.
+QR Code para acesso rápido ao evento.
+7️⃣ Relatórios do Evento
+Permite gerar relatórios de:
+Presença de participantes
+Estatísticas de participação
+Comparação entre eventos passados
+Opção para exportação (PDF, Excel, CSV).
+
+-------------------------------------------------------
+
+📌 Telas do Painel Administrativo
+Aqui está a lista de telas que precisamos desenvolver no painel administrativo do sistema:
+
+1️⃣ Dashboard (Painel Principal)
+Estatísticas gerais (eventos criados, ativos, visitantes registrados)
+Lista dos últimos eventos
+2️⃣ Usuários
+Listagem de usuários
+Cadastro/Edição de usuário
+Exclusão de usuário
+3️⃣ Empresas
+Listagem de empresas
+Cadastro/Edição de empresa
+Exclusão de empresa
+4️⃣ Funcionários (Staff)
+Listagem de funcionários por empresa
+Cadastro/Edição de funcionário
+Exclusão de funcionário
+5️⃣ Visitantes
+Listagem de visitantes cadastrados
+Detalhes do visitante (eventos que participou)
+Exclusão de visitante
+6️⃣ Eventos
+Listagem de eventos criados
+Cadastro/Edição de evento
+Exclusão de evento
+7️⃣ Configurações
+Gerenciamento de permissões e papéis
+Preferências do sistema
+
+📌 Telas da Empresa (Área da Empresa no Sistema)
+Configurações da Empresa – Permitir alterar informações como logo, cores do sistema, e outras configurações personalizadas.
+Gerenciamento de Usuários da Empresa – Listagem e controle de acesso de usuários dentro da empresa (exemplo: adicionar ou remover administradores).
+Relatórios da Empresa – Tela para gerar e visualizar relatórios (visitantes, expositores, eventos, etc.).
+Plano e Pagamento – Tela para gerenciar o plano assinado pela empresa e detalhes do pagamento.
+Dashboard da Empresa – Resumo de informações da empresa, como quantidade de funcionários, visitantes, expositores, eventos, etc.
+📌 Telas do Admin (Painel de Controle do Sistema)
+Gerenciamento de Empresas – Listagem e edição dos dados das empresas cadastradas no sistema.
+Gerenciamento de Usuários (Admin) – Controle de usuários administradores do sistema e permissões.
+Configurações Globais do Sistema – Definições gerais como idiomas, temas e regras do sistema.
+Logs e Auditoria – Histórico de ações feitas pelos usuários no sistema (quem fez login, mudanças importantes, etc.).
+Dashboard do Admin – Painel geral com estatísticas do sistema, total de empresas, usuários, eventos, etc.

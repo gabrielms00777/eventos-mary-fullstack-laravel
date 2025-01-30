@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ isset($title) ? $title . ' - ' . config('app.name') : config('app.name') }}</title>
-
+    @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -47,36 +47,16 @@
                         </x-slot:actions>
                     </x-list-item>
                     <x-menu-separator />
-                    @php
-                        $users = [
-                            [
-                                'id' => 1,
-                                'name' => 'Evento 1',
-                            ],
-                            [
-                                'id' => 2,
-                                'name' => 'Evento 2',
-                                'disabled' => true,
-                            ],
-                            [
-                                'id' => 3,
-                                'name' => 'Evento 3',
-                            ],
-                        ];
-                    @endphp
-
-                    <x-select label="Selecione o Evento" class="rounded-lg" :options="$users" />
-
-                    <x-menu-separator />
                 @endif
 
-                <x-menu-item title="Dashboard" icon="o-home" link="/admin/dashboard" />
+                <x-menu-item title="Dashboard" icon="o-home" :link="route('admin.dashboard')" wire:navigate />
                 <x-menu-item title="Empresas" icon="o-building-office" link="/admin/empresas" />
-                <x-menu-item title="Eventos" icon="o-calendar" link="/admin/events" />
-                <x-menu-item title="Relatórios" icon="o-chart-bar" link="/admin/reports" />
+                <x-menu-item title="Eventos" icon="o-calendar" :link="route('admin.events.index')" />
+                <x-menu-item title="Relatórios" icon="o-chart-bar" :link="route('admin.reports.index')" />
 
                 <x-menu-sub title="Configurações" icon="o-cog-6-tooth">
-                    <x-menu-item title="Usuários" icon="o-users" link="/admin/users" />
+                    <x-menu-item title="Usuários" icon="o-users" link="{{ route('admin.users.index') }}"
+                        wire:navigate />
                     <x-menu-item title="Permissões" icon="o-lock-closed" link="/admin/permissions" />
                 </x-menu-sub>
 
@@ -91,6 +71,7 @@
 
     {{--  TOAST area --}}
     <x-toast />
+    @livewireScripts
 </body>
 
 </html>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ isset($title) ? $title . ' - ' . config('app.name') : config('app.name') }}</title>
-
+    @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -73,7 +73,7 @@
                 <x-menu-item title="Dashboard" icon="o-home" link="/staff/dashboard" />
                 <x-menu-item title="Eventos Ativos" icon="o-calendar" link="/staff/events" />
                 <x-menu-item title="Check-in Visitantes" icon="o-check-circle" link="/staff/checkin" />
-                <x-menu-item title="Relatórios de Acesso" icon="o-clipboard-list" link="/staff/relatorios" />
+                <x-menu-item title="Relatórios de Acesso" icon="o-clipboard-document" link="/staff/relatorios" />
 
             </x-menu>
         </x-slot:sidebar>
@@ -86,6 +86,7 @@
 
     {{--  TOAST area --}}
     <x-toast />
+    @livewireScripts
 </body>
 
 </html>

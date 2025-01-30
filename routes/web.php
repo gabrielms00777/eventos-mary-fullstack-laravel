@@ -8,7 +8,6 @@ use Livewire\Volt\Volt;
 Auth::loginUsingId(1);
 
 Route::view('/', 'home');
-Volt::route('/admin/users', 'users.index');
 
 Volt::route('/login', 'login')->name('auth.login');
 Volt::route('/register', 'register')->name('auth.register');
@@ -20,34 +19,39 @@ Route::get('/logout', LogoutController::class)->name('auth.logout');
 Route::middleware(['auth'])->group(function () {
 
     Route::prefix('admin')->name('admin.')->middleware(['role:admin'])->group(function () {
-        Route::view('/', 'admin.dashboard')->name('dashboard');
-        Route::view('/empresas', 'admin.companies.index')->name('companies.index');
+        Volt::route('/dashboard', 'admin.dashboard')->name('dashboard');
+        Volt::route('/users', 'admin.users.index')->name('users.index');
+        Volt::route('/empresas', 'admin.companies.index')->name('companies.index');
         Route::view('/empresas/create', 'admin.companies.create')->name('companies.create');
         Route::view('/empresas/{company}/edit', 'admin.companies.edit')->name('companies.edit');
-        Route::view('/eventos', 'admin.events.index')->name('events.index');
+        Volt::route('/eventos', 'admin.events.index')->name('events.index');
         Route::view('/eventos/create', 'admin.events.create')->name('events.create');
         Route::view('/eventos/{event}/edit', 'admin.events.edit')->name('events.edit');
         Route::view('/relatorios', 'admin.reports.index')->name('reports.index');
     });
 
     Route::prefix('empresa')->name('company.')->middleware(['role:company'])->group(function () {
-        Route::view('/dashboard', 'company.dashboard')->name('dashboard');
-        Route::view('/eventos', 'company.events.index')->name('events.index');
-        Route::view('/eventos/{event}/edit', 'company.events.edit')->name('events.edit');
-        Route::view('/funcionarios', 'company.employees.index')->name('employees.index');
-        Route::view('/visitantes', 'company.visitors.index')->name('visitors.index');
-        Route::view('/expositores', 'company.exhibitors.index')->name('exhibitors.index');
+        Volt::route('/dashboard', 'company.dashboard')->name('dashboard');
+        Volt::route('/eventos', 'company.events.index')->name('events.index');
+        Volt::route('/eventos/{event}/edit', 'company.events.edit')->name('events.edit');
+        Volt::route('/funcionarios', 'company.employees.index')->name('employees.index');
+        Volt::route('/funcionarios/create', 'company.employees.create')->name('employees.create');
+        Volt::route('/visitantes', 'company.visitors.index')->name('visitors.index');
+        Volt::route('/visitantes/create', 'company.visitors.create')->name('visitors.create');
+        Volt::route('/expositores', 'company.exhibitors.index')->name('exhibitors.index');
+        Volt::route('/expositores/create', 'company.exhibitors.create')->name('exhibitors.create');
+        Volt::route('/perfil', 'company.profile')->name('profile');
     });
 
     Route::prefix('funcionario')->name('employee.')->middleware(['role:employee'])->group(function () {
-        Route::view('/dashboard', 'employee.dashboard')->name('dashboard');
-        Route::view('/eventos', 'employee.events.index')->name('events.index');
-        Route::view('/check-in', 'employee.checkin.index')->name('checkin.index');
+        Volt::route('/dashboard', 'employee.dashboard')->name('dashboard');
+        Volt::route('/eventos', 'employee.events.index')->name('events.index');
+        Volt::route('/check-in', 'employee.checkin.index')->name('checkin.index');
     });
 
     Route::prefix('visitante')->name('visitor.')->middleware(['role:visitor'])->group(function () {
-        Route::view('/dashboard', 'visitor.dashboard')->name('dashboard');
-        Route::view('/meus-eventos', 'visitor.events.index')->name('events.index');
-        Route::view('/check-in', 'visitor.checkin.index')->name('checkin.index');
+        Volt::route('/dashboard', 'visitor.dashboard')->name('dashboard');
+        Volt::route('/meus-eventos', 'visitor.events.index')->name('events.index');
+        Volt::route('/check-in', 'visitor.checkin.index')->name('checkin.index');
     });
 });

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ isset($title) ? $title . ' - ' . config('app.name') : config('app.name') }}</title>
-
+    @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -70,11 +70,11 @@
                     <x-menu-separator />
                 @endif
 
-                <x-menu-item title="Dashboard" icon="o-home" link="/empresa/dashboard" />
-                <x-menu-item title="Meus Eventos" icon="o-calendar" link="/empresa/events" />
-                <x-menu-item title="Funcionários" icon="o-users" link="/empresa/staff" />
-                <x-menu-item title="Visitantes" icon="o-user-group" link="/empresa/visitantes" />
-                <x-menu-item title="Expositores" icon="o-presentation-chart-bar" link="/empresa/expositores" />
+                <x-menu-item title="Dashboard" icon="o-home" :link="route('company.dashboard')" />
+                <x-menu-item title="Meus Eventos" icon="o-calendar" :link="route('company.events.index')" />
+                <x-menu-item title="Funcionários" icon="o-users" :link="route('company.employees.index')" />
+                <x-menu-item title="Visitantes" icon="o-user-group" :link="route('company.visitors.index')" />
+                <x-menu-item title="Expositores" icon="o-presentation-chart-bar" :link="route('company.exhibitors.index')" />
 
                 <x-menu-sub title="Configurações" icon="o-cog-6-tooth">
                     <x-menu-item title="Perfil da Empresa" icon="o-building-office" link="/empresa/perfil" />
@@ -92,6 +92,7 @@
 
     {{--  TOAST area --}}
     <x-toast />
+    @livewireScripts
 </body>
 
 </html>
