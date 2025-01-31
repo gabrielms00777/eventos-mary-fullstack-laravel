@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
         Volt::route('/eventos', 'admin.events.index')->name('events.index');
         Route::view('/eventos/create', 'admin.events.create')->name('events.create');
         Route::view('/eventos/{event}/edit', 'admin.events.edit')->name('events.edit');
-        Route::view('/relatorios', 'admin.reports.index')->name('reports.index');
+        Volt::route('/relatorios', 'admin.reports.index')->name('reports.index');
     });
 
     Route::prefix('empresa')->name('company.')->middleware(['role:company'])->group(function () {
