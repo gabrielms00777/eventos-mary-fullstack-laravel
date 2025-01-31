@@ -5,9 +5,7 @@ use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 
-new #[Layout('components.layouts.empty')] #[Title('Login')] class
-    // <-- Here is the `empty` layout
-    extends Component {
+new #[Layout('components.layouts.empty')] #[Title('Login')] class extends Component {
     #[Rule('required|email')]
     public string $email = '';
 

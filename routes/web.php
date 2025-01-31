@@ -22,11 +22,11 @@ Route::middleware(['auth'])->group(function () {
         Volt::route('/dashboard', 'admin.dashboard')->name('dashboard');
         Volt::route('/users', 'admin.users.index')->name('users.index');
         Volt::route('/empresas', 'admin.companies.index')->name('companies.index');
-        Route::view('/empresas/create', 'admin.companies.create')->name('companies.create');
-        Route::view('/empresas/{company}/edit', 'admin.companies.edit')->name('companies.edit');
+        Volt::route('/empresas/create', 'admin.companies.create')->name('companies.create');
+        Volt::route('/empresas/{company}/edit', 'admin.companies.edit')->name('companies.edit');
         Volt::route('/eventos', 'admin.events.index')->name('events.index');
-        Route::view('/eventos/create', 'admin.events.create')->name('events.create');
-        Route::view('/eventos/{event}/edit', 'admin.events.edit')->name('events.edit');
+        Volt::route('/eventos/create', 'admin.events.create')->name('events.create');
+        Volt::route('/eventos/{event}/edit', 'admin.events.edit')->name('events.edit');
         Volt::route('/relatorios', 'admin.reports.index')->name('reports.index');
     });
 

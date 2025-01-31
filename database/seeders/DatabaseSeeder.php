@@ -18,15 +18,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::factory()->create([
+            'name' => 'Test User',
+            'role' => 'admin',
+            'email' => 'admin@admin',
+            'password' => 'admin',
+        ]);
+
         Company::factory(3)->create()->each(function ($company) {
-            // Criando 5 funcionários por empresa
             Employee::factory(5)->create(['company_id' => $company->id]);
 
-            // Criando 3 eventos por empresa
             Event::factory(3)->create(['company_id' => $company->id])->each(function ($event) {
-                // Criando 10 visitantes por evento
                 Visitor::factory(10)->create()->each(function ($visitor) use ($event) {
-                    // Criando inscrição dos visitantes no evento
                     EventRegistration::factory()->create([
                         'event_id' => $event->id,
                         'visitor_id' => $visitor->id,
