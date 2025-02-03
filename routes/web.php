@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LogoutController;
+use App\Livewire\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -21,9 +22,9 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->name('admin.')->middleware(['role:admin'])->group(function () {
         Volt::route('/dashboard', 'admin.dashboard')->name('dashboard');
         Volt::route('/users', 'admin.users.index')->name('users.index');
-        Volt::route('/empresas', 'admin.companies.index')->name('companies.index');
-        Volt::route('/empresas/create', 'admin.companies.create')->name('companies.create');
-        Volt::route('/empresas/{company}/edit', 'admin.companies.edit')->name('companies.edit');
+        Volt::route('/empresas', Admin\Companies\Index::class)->name('companies.index');
+        Volt::route('/empresas/create', Admin\Companies\Create::class)->name('companies.create');
+        Volt::route('/empresas/{company}/edit', Admin\Companies\Edit::class)->name('companies.edit');
         Volt::route('/eventos', 'admin.events.index')->name('events.index');
         Volt::route('/eventos/create', 'admin.events.create')->name('events.create');
         Volt::route('/eventos/{event}/edit', 'admin.events.edit')->name('events.edit');

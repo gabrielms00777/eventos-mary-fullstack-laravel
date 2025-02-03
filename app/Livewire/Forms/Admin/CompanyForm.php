@@ -8,21 +8,21 @@ use Livewire\Form;
 
 class CompanyForm extends Form
 {
-    public ?Company $company;
+    public ?Company $company = null;
 
-    #[Validate(['requered', 'string', 'max:255'])]
+    #[Validate(['required', 'string', 'max:255'])]
     public ?string $name = null;
 
-    #[Validate(['requered', 'email', 'max:255'])]
+    #[Validate(['required', 'email', 'max:255'])]
     public ?string $email = null;
 
-    #[Validate(['requered', 'string', 'max:255'])]
+    #[Validate(['required', 'string', 'max:255'])]
     public ?string $cnpj = null;
 
-    #[Validate(['requered', 'string', 'max:255'])]
+    #[Validate(['required', 'string', 'max:255'])]
     public ?string $phone = null;
 
-    #[Validate(['requered', 'string', 'max:255'])]
+    #[Validate(['required', 'string', 'max:255'])]
     public ?string $address = null;
 
     public function setCompany(Company $company)
@@ -37,15 +37,7 @@ class CompanyForm extends Form
 
     public function store()
     {
-        $this->validate();
-
-        Company::create($this->only([
-            'name',
-            'email',
-            'cnpj',
-            'phone',
-            'address',
-        ]));
+        Company::create($this->validate());
     }
 
     public function update()

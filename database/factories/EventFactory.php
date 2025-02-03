@@ -24,6 +24,7 @@ class EventFactory extends Factory
             'start_date' => fake()->dateTimeBetween('now', '+1 month'),
             'end_date' => fake()->dateTimeBetween('+1 month', '+2 months'),
             'location' => fake()->address,
+            'image_url' => fake()->imageUrl(),
             'max_participants' => fake()->randomDigit(10, 1000),
             'status' => fake()->randomElement(['pending', 'ongoing', 'completed']),
         ];
