@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
-Auth::loginUsingId(1);
+// Auth::loginUsingId(2);
 
 Route::view('/', 'home');
 
-Volt::route('/login', 'login')->name('auth.login');
+Volt::route('/login', 'login')->name('login');
 Volt::route('/register', 'register')->name('auth.register');
 Route::view('/eventos', 'public.events')->name('events.public');
 Route::view('/eventos/{event}', 'public.event')->name('event.show');
@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function () {
         Volt::route('/relatorios', 'admin.reports.index')->name('reports.index');
     });
 
-    Route::prefix('empresa')->name('company.')->middleware(['role:company'])->group(function () {
+    Route::prefix('empresa')->name('company.')->middleware(['role:event_owner'])->group(function () {
         Volt::route('/dashboard', 'company.dashboard')->name('dashboard');
         Volt::route('/eventos', 'company.events.index')->name('events.index');
         Volt::route('/eventos/{event}/edit', 'company.events.edit')->name('events.edit');

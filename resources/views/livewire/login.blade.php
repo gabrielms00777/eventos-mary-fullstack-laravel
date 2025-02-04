@@ -27,7 +27,18 @@ new #[Layout('components.layouts.empty')] #[Title('Login')] class extends Compon
         if (auth()->attempt($credentials)) {
             request()->session()->regenerate();
 
-            return redirect()->intended('/');
+            $user = auth()->user();
+
+            $redirectTo = match ($user->role) {
+                'admin' => '/admin/dashboard',
+                'event_owner' => '/empresa/dashboard',
+                'visitant' => '/visitante/dashboard',
+                'employee' => '/funcionario/dashboard',
+                default => '/',
+            };
+            // dd($user, $redirectTo);
+
+            return redirect()->intended($redirectTo);
         }
 
         $this->addError('email', 'The provided credentials do not match our records.');

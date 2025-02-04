@@ -9,7 +9,11 @@
         </x-slot:actions>
     </x-header>
 
-    <x-card title="Dados do evento">
+    <x-card title="Dados do evento" x-data="{ isEditing: $wire.entangle('isEditing').live }">
+        <span x-text="isEditing ? 'Editar Evento' : 'Visualizar Evento'"></span>
+        <button @click="isEditing = !isEditing">mudar</button>
+        <input type="text" name="" id="" :disabled="!isEditing">
+        {{ $isEditing }}
         <div class="mb-4">
             <img src="{{ $event->image_url }}" alt="Imagem do Evento" class="w-full h-64 object-cover rounded-lg" />
         </div>
@@ -33,7 +37,7 @@
                     <x-button label="Salvar" icon="o-check" primary wire:click="save" />
                 @else
                     {{-- <x-button label="Editar" icon="o-pencil" primary wire:click="$set('isEditing', true)" /> --}}
-                    <x-button label="Editar" icon="o-pencil" primary x-on:click="$wire.isEditing = true" />
+                    <x-button label="Editar" icon="o-pencil" primary @click="isEditing = true" />
                 @endif
             </div>
         </x-form>
