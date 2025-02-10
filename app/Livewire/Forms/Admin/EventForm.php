@@ -2,9 +2,18 @@
 
 namespace App\Livewire\Forms\Admin;
 
+use App\Enums\UserTypeEnum;
+use App\Models\Company;
+use App\Models\Employee;
 use App\Models\Event;
+use App\Models\User;
+use App\Notifications\NewEventCreatedNotification;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class EventForm extends Form
 {
@@ -13,7 +22,7 @@ class EventForm extends Form
     #[Validate(['required', 'string', 'max:255'])]
     public ?string $name = null;
 
-    #[Validate(['required', 'integer', 'min:0'])]
+    #[Validate(['required', 'integer', 'min:1'])]
     public ?int $max_participants = null;
 
     #[Validate(['required', 'date'])]
@@ -21,9 +30,6 @@ class EventForm extends Form
 
     #[Validate(['required', 'date', 'after_or_equal:start_date'])]
     public ?string $end_date = null;
-
-    #[Validate(['string', 'url', 'max:255', 'nullable'])]
-    public ?string $image_url = null;
 
     #[Validate(['required', 'integer'])]
     public ?int $company_id = null;
@@ -34,6 +40,10 @@ class EventForm extends Form
     #[Validate(['string', 'nullable', 'max:255'])]
     public ?string $location = null;
 
+    #[Validate(['nullable', 'image', 'max:2048'])]
+    public $image;
+
+    public ?string $image_url = null;
 
     public function setEvent(Event $event)
     {
@@ -50,13 +60,71 @@ class EventForm extends Form
 
     public function store()
     {
-        Event::create($this->validate());
+        
+        $this->validate();
+
+        DB::beginTransaction();
+        
+        if ($this->image) {
+            $this->image_url = $this->uploadImage($this->image);
+        }
+
+        $event = Event::create([
+            'name' => $this->name,
+            'description' => $this->description,
+            'location' => $this->location,
+            'max_participants' => $this->max_participants,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'company_id' => $this->company_id,
+            'image_url' => $this->image_url,
+        ]);
+
+        $adminOrMange = User::whereHas('employee', function ($query) {
+            $query->where('company_id', $this->company_id)
+                ->whereIn('role', [UserTypeEnum::ADMIN, UserTypeEnum::MANAGER]);
+        })->first();
+        
+        if($adminOrMange){
+            $password = Str::random(10);
+            $adminOrMange->update([
+                'password' => Hash::make($password),
+                'last_event_id' => $event->id,
+            ]);
+
+            $adminOrMange->notify(new NewEventCreatedNotification($event, $password));
+        }
+
+        DB::commit();
+        return;
+        // try {
+
+        // } catch (\Exception $e) {
+        //     DB::rollBack();
+
+        //     throw $e;
+        // }
     }
 
     public function update()
     {
-        $this->validate();
+        if ($this->image) {
+            $this->image_url = $this->uploadImage($this->image);
+        }
 
-        $this->event->update($this->all());
+        $this->event->update([
+            'name' => $this->name,
+            'description' => $this->description,
+            'location' => $this->location,
+            'max_participants' => $this->max_participants,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'image_url' => $this->image_url,
+        ]);
+    }
+
+    protected function uploadImage($image)
+    {
+        return Storage::url($image->store('public/events'));
     }
 }

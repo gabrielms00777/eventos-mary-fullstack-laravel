@@ -46,28 +46,6 @@
                                 no-wire-navigate link="/logout" />
                         </x-slot:actions>
                     </x-list-item>
-                    <x-menu-separator />
-                    @php
-                        $users = [
-                            [
-                                'id' => 1,
-                                'name' => 'Evento 1',
-                            ],
-                            [
-                                'id' => 2,
-                                'name' => 'Evento 2',
-                                'disabled' => true,
-                            ],
-                            [
-                                'id' => 3,
-                                'name' => 'Evento 3',
-                            ],
-                        ];
-                    @endphp
-
-                    <x-select label="Selecione o Evento" class="rounded-lg" :options="$users" />
-
-                    <x-menu-separator />
                 @endif
 
                 <x-menu-item title="Dashboard" icon="o-home" :link="route('company.dashboard')" />

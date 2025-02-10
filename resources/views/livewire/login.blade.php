@@ -4,6 +4,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
+use App\Enums\UserTypeEnum;
 
 new #[Layout('components.layouts.empty')] #[Title('Login')] class extends Component {
     #[Rule('required|email')]
@@ -30,10 +31,10 @@ new #[Layout('components.layouts.empty')] #[Title('Login')] class extends Compon
             $user = auth()->user();
 
             $redirectTo = match ($user->role) {
-                'admin' => '/admin/dashboard',
-                'event_owner' => '/empresa/dashboard',
-                'visitant' => '/visitante/dashboard',
-                'employee' => '/funcionario/dashboard',
+                UserTypeEnum::ADMIN => '/admin/dashboard',
+                UserTypeEnum::MANAGER => '/empresa/dashboard',
+                UserTypeEnum::VISITOR => '/visitante/dashboard',
+                UserTypeEnum::EMPLOYEE => '/funcionario/dashboard',
                 default => '/',
             };
             // dd($user, $redirectTo);

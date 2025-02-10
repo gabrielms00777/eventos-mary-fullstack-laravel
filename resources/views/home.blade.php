@@ -18,6 +18,7 @@
                 <a href="#" class="px-4">Home</a>
                 <a href="#" class="px-4">Sobre</a>
                 <a href="#" class="px-4">Contato</a>
+                <a href="{{ route('login') }}" class="px-4">Login</a>
             </nav>
         </div>
     </header>

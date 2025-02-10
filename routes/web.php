@@ -1,7 +1,9 @@
 <?php
 
+use App\Enums\UserTypeEnum;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Livewire\Admin;
+use App\Livewire\Company;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -19,7 +21,7 @@ Route::get('/logout', LogoutController::class)->name('auth.logout');
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::prefix('admin')->name('admin.')->middleware(['role:admin'])->group(function () {
+    Route::prefix('admin')->name('admin.')->middleware(['role:' . UserTypeEnum::ADMIN->value])->group(function () {
         Volt::route('/dashboard', 'admin.dashboard')->name('dashboard');
         Volt::route('/users', 'admin.users.index')->name('users.index');
         Volt::route('/empresas', Admin\Companies\Index::class)->name('companies.index');
@@ -31,8 +33,8 @@ Route::middleware(['auth'])->group(function () {
         Volt::route('/relatorios', 'admin.reports.index')->name('reports.index');
     });
 
-    Route::prefix('empresa')->name('company.')->middleware(['role:event_owner'])->group(function () {
-        Volt::route('/dashboard', 'company.dashboard')->name('dashboard');
+    Route::prefix('empresa')->name('company.')->middleware(['role:' . UserTypeEnum::MANAGER->value])->group(function () {
+        Volt::route('/dashboard', Company\Dashboard\Index::class)->name('dashboard');
         Volt::route('/eventos', 'company.events.index')->name('events.index');
         Volt::route('/eventos/{event}/edit', 'company.events.edit')->name('events.edit');
         Volt::route('/funcionarios', 'company.employees.index')->name('employees.index');
@@ -44,13 +46,13 @@ Route::middleware(['auth'])->group(function () {
         Volt::route('/perfil', 'company.profile')->name('profile');
     });
 
-    Route::prefix('funcionario')->name('employee.')->middleware(['role:employee'])->group(function () {
+    Route::prefix('funcionario')->name('employee.')->middleware(['role:' . UserTypeEnum::EMPLOYEE->value])->group(function () {
         Volt::route('/dashboard', 'employee.dashboard')->name('dashboard');
         Volt::route('/eventos', 'employee.events.index')->name('events.index');
         Volt::route('/check-in', 'employee.checkin.index')->name('checkin.index');
     });
 
-    Route::prefix('visitante')->name('visitor.')->middleware(['role:visitor'])->group(function () {
+    Route::prefix('visitante')->name('visitor.')->middleware(['role:' . UserTypeEnum::VISITOR->value])->group(function () {
         Volt::route('/dashboard', 'visitor.dashboard')->name('dashboard');
         Volt::route('/meus-eventos', 'visitor.events.index')->name('events.index');
         Volt::route('/check-in', 'visitor.checkin.index')->name('checkin.index');

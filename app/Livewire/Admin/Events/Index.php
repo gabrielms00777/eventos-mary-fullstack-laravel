@@ -24,7 +24,7 @@ class Index extends Component
             //     return $query->where('nome', 'like', '%' . $this->search . '%');
             // })
             ->select('*')
-            ->simplePaginate(3);
+            ->simplePaginate(9);
     }
 
     public function eventsRealizados()

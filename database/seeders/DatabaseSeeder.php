@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserTypeEnum;
+use App\Enums\EmployeeTypeEnum;
 use App\Models\User;
 use App\Models\Event;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -20,13 +22,15 @@ class DatabaseSeeder extends Seeder
     {
         User::factory()->create([
             'name' => 'Test User',
-            'role' => 'admin',
+            'role' => UserTypeEnum::ADMIN,
             'email' => 'admin@admin',
             'password' => 'admin',
         ]);
 
         Company::factory(3)->create()->each(function ($company) {
-            Employee::factory(5)->create(['company_id' => $company->id]);
+            Employee::factory(2)->create(['company_id' => $company->id, 'role' => EmployeeTypeEnum::ADMIN]);
+            Employee::factory(5)->create(['company_id' => $company->id, 'role' => EmployeeTypeEnum::MANAGER]);
+            Employee::factory(10)->create(['company_id' => $company->id, 'role' => EmployeeTypeEnum::STAFF]);
 
             Event::factory(3)->create(['company_id' => $company->id])->each(function ($event) {
                 Visitor::factory(10)->create()->each(function ($visitor) use ($event) {

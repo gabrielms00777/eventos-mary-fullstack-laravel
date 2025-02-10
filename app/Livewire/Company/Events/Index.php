@@ -17,17 +17,12 @@ class Index extends Component
     public function events()
     {
         return Event::query()
-            // ->where('company_id', 2)
             ->where('company_id', Auth::user()->company_id)
-            // ->select('id', 'name')
             ->get();
     }
 
     public function render()
     {
-        // Auth::user()->update(['company_id' => 2]);
-        // dd(Auth::user()->company_id);
-        // dd($this->events);
         return view('livewire.company.events.index');
     }
 }

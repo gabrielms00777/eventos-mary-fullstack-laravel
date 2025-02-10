@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Livewire\Admin\Companies;
+namespace App\Livewire\Company\Employees;
 
-use App\Livewire\Forms\Admin\CompanyForm;
+use App\Livewire\Forms\Company\EmployeeForm;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Mary\Traits\Toast;
 
-#[Title('Cadastro Empresa')]
-#[Layout('components.layouts.admin')] 
+#[Title('Cadastrar Funcionário')]
+#[Layout('components.layouts.company')]
 class Create extends Component
 {
     use Toast;
 
-    public CompanyForm $form;
+    public EmployeeForm $form;
 
     public function save()
     {
@@ -23,20 +23,20 @@ class Create extends Component
 
             $this->toast(
                 type: 'success',
-                title: 'Empresa e responsável cadastrados com sucesso!',
-                redirectTo: route('admin.companies.index')
+                title: 'Funcionário cadastrado com sucesso!',
+                redirectTo: route('company.employees.index')
             );
         } catch (\Exception $e) {
             $this->toast(
                 type: 'error',
-                title: 'Erro ao cadastrar empresa!',
+                title: 'Erro ao cadastrar funcionário!',
                 description: $e->getMessage()
             );
         }
     }
-
+    
     public function render()
     {
-        return view('livewire.admin.companies.create');
+        return view('livewire.company.employees.create');
     }
 }
