@@ -6,9 +6,10 @@ use App\Models\Event;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Enums\EmployeeTypeEnum;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
-use App\Enums\EmployeeTypeEnum;
+
 #[Title('Dashboard')]
 #[Layout('components.layouts.company')]
 class Index extends Component

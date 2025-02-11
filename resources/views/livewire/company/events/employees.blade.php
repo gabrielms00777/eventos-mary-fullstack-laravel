@@ -1,3 +1,45 @@
 <div>
-    {{-- Do your work, then step back. --}}
+    <x-header title="Funcionários do Evento" separator progress-indicator>
+        <x-slot:middle class="!justify-end">
+            <x-input placeholder="Pesquisar..." wire:model.live.debounce="search" clearable icon="o-magnifying-glass" />
+        </x-slot:middle>
+        <x-slot:actions>
+            <x-button label="Selecionar Todos" icon="o-check-circle" wire:click="selectAll" spinner class="btn-secondary" />
+
+            <x-button label="Remover Todos" icon="o-x-circle" wire:click="removeAll" spinner class="btn-secondary" />
+
+            <x-button label="Adicionar Selecionados" icon="o-user-plus" wire:click="addSelected" spinner class="btn-primary" />
+
+            <x-button label="Remover Selecionados" icon="o-user-minus" wire:click="removeSelected" spinner class="btn-danger" />
+        </x-slot:actions>
+    </x-header>
+
+    <x-card>
+        <x-table
+            :headers="$headers"
+            :rows="$this->employees"
+            wire:model="selected"
+            selectable
+            with-pagination
+            @row-selection="console.log($event.detail)"
+        >
+            @scope('cell_is_linked', $employee)
+                @if ($this->event->employees->contains($employee->id))
+                    <span class="text-green-500">Sim</span>
+                @else
+                    <span class="text-red-500">Não</span>
+                @endif
+            @endscope
+
+            @scope('actions', $employee)
+                @if ($this->event->employees->contains($employee->id))
+                    <x-button icon="o-user-minus" wire:click="removeFromEvent({{ $employee->id }})" spinner
+                        class="btn-ghost btn-sm text-red-500" />
+                @else
+                    <x-button icon="o-user-plus" wire:click="addToEvent({{ $employee->id }})" spinner
+                        class="btn-ghost btn-sm text-green-500" />
+                @endif
+            @endscope
+        </x-table>
+    </x-card>
 </div>

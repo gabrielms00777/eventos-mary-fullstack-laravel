@@ -1,29 +1,25 @@
-<?php
-
-use Livewire\Volt\Component;
-use Illuminate\Support\Collection;
-use Livewire\Attributes\Layout;
-
-new #[Layout('components.layouts.employee')] #[Title('Dashboard')] class extends Component {
-    //
-}; ?>
-
 <div>
-    <x-header title="Eventos" separator progress-indicator>
+    <x-header title="Meus Eventos" separator>
         <x-slot:middle class="!justify-end">
             <x-input placeholder="Pesquisar..." wire:model.live.debounce="search" clearable icon="o-magnifying-glass" />
         </x-slot:middle>
     </x-header>
 
     <x-card>
-        <x-table :headers="$headers" :rows="$eventos" :sort-by="$sortBy">
-            @scope('actions', $evento)
-                @if (!$evento['concluido'])
-                    <x-button label="Selecionar" wire:click="selecionarEvento({{ $evento['id'] }})" primary />
-                @else
-                    <x-button label="Visualizar" wire:click="visualizarEvento({{ $evento['id'] }})" />
-                @endif
+        <x-table :headers="[
+            ['key' => 'name', 'label' => 'Nome'],
+            ['key' => 'start_date', 'label' => 'Data de Início'],
+            ['key' => 'location', 'label' => 'Local'],
+            ['key' => 'actions', 'label' => 'Ações'],
+        ]" :rows="$events">
+            @scope('cell_start_date', $event)
+                {{ $event->start_date->format('d/m/Y H:i') }}
+            @endscope
+
+            @scope('actions', $event)
+                <x-button icon="o-eye" wire:click="viewEvent({{ $event->id }})" spinner class="btn-ghost btn-sm text-blue-500" />
             @endscope
         </x-table>
+
     </x-card>
 </div>

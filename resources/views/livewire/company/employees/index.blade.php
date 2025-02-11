@@ -4,13 +4,6 @@
             <x-input placeholder="Pesquisar..." wire:model.live.debounce="search" clearable icon="o-magnifying-glass" />
         </x-slot:middle>
         <x-slot:actions>
-            <x-button label="Selecionar Todos" icon="o-check-circle" wire:click="selectAll" spinner class="btn-secondary" />
-
-            <x-button label="Remover Todos" icon="o-x-circle" wire:click="removeAll" spinner class="btn-secondary" />
-
-            <x-button label="Adicionar Selecionados" icon="o-user-plus" wire:click="addSelected" spinner class="btn-primary" />
-
-            <x-button label="Remover Selecionados" icon="o-user-minus" wire:click="removeSelected" spinner class="btn-danger" />
             <x-button label="Adicionar Funcionário" icon="o-plus" :link="route('company.employees.create')" spinner class="btn-primary" />
         </x-slot:actions>
     </x-header>

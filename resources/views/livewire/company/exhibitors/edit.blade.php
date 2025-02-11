@@ -1,12 +1,12 @@
 <div>
-    <x-header title="Cadastrar Expositor" separator>
+    <x-header title="Editar Expositor" separator>
         <x-slot:actions>
             <x-button label="Voltar" icon="o-arrow-left" secondary :link="route('company.exhibitors.index')" />
         </x-slot:actions>
     </x-header>
 
     <x-card>
-        <x-form wire:submit="save">
+        <x-form wire:submit="update">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- Nome -->
                 <x-input label="Nome" wire:model="form.name" placeholder="Digite o nome do expositor" />
@@ -25,7 +25,7 @@
             </div>
 
             <x-slot:actions>
-                <x-button label="Salvar" icon="o-check" class="btn-primary" type="submit" spinner="save" />
+                <x-button label="Atualizar" icon="o-check" class="btn-primary" type="submit" spinner="update" />
             </x-slot:actions>
         </x-form>
     </x-card>

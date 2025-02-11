@@ -10,7 +10,13 @@ class Visitor extends Model
     /** @use HasFactory<\Database\Factories\VisitorFactory> */
     use HasFactory;
 
-    protected $fillable = ['user_id', 'company_id', 'phone'];
+    protected $fillable = [
+        'user_id',
+        'company_id',
+        'phone',
+        'position',
+        'company',
+    ];
 
     public function user()
     {

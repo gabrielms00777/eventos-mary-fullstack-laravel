@@ -7,10 +7,11 @@ use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\Computed;
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Mary\Traits\Toast;
 use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
+
 #[Title('Funcionários')]
 #[Layout('components.layouts.company')]
 class Index extends Component

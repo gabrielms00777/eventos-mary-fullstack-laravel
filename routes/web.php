@@ -4,6 +4,7 @@ use App\Enums\UserTypeEnum;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Livewire\Admin;
 use App\Livewire\Company;
+use App\Livewire\Employee;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -52,15 +53,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/expositores', Company\Exhibitors\Index::class)->name('exhibitors.index');
         Route::get('/expositores/create', Company\Exhibitors\Create::class)->name('exhibitors.create');
 
-        Route::get('/perfil', Company\Profile::class)->name('profile');
+        Route::get('/perfil', Company\CompanyProfile::class)->name('profile');
         Route::get('/meu-perfil', Company\MyProfile::class)->name('my-profile');
         Route::get('/acessos', Company\Access\Index::class)->name('access.index');
     });
 
     Route::prefix('funcionario')->name('employee.')->middleware(['role:' . UserTypeEnum::EMPLOYEE->value])->group(function () {
-        Volt::route('/dashboard', 'employee.dashboard')->name('dashboard');
-        Volt::route('/eventos', 'employee.events.index')->name('events.index');
-        Volt::route('/check-in', 'employee.checkin.index')->name('checkin.index');
+        Volt::route('/dashboard', Employee\Dashboard\Index::class)->name('dashboard');
+        Volt::route('/eventos', Employee\Events\Index::class)->name('events.index');
+        Volt::route('/check-in', Employee\Checkin\Index::class)->name('checkin.index');
     });
 
     Route::prefix('visitante')->name('visitor.')->middleware(['role:' . UserTypeEnum::VISITOR->value])->group(function () {
