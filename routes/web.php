@@ -34,16 +34,27 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::prefix('empresa')->name('company.')->middleware(['role:' . UserTypeEnum::MANAGER->value])->group(function () {
-        Volt::route('/dashboard', Company\Dashboard\Index::class)->name('dashboard');
-        Volt::route('/eventos', 'company.events.index')->name('events.index');
-        Volt::route('/eventos/{event}/edit', 'company.events.edit')->name('events.edit');
-        Volt::route('/funcionarios', 'company.employees.index')->name('employees.index');
-        Volt::route('/funcionarios/create', 'company.employees.create')->name('employees.create');
-        Volt::route('/visitantes', 'company.visitors.index')->name('visitors.index');
-        Volt::route('/visitantes/create', 'company.visitors.create')->name('visitors.create');
-        Volt::route('/expositores', 'company.exhibitors.index')->name('exhibitors.index');
-        Volt::route('/expositores/create', 'company.exhibitors.create')->name('exhibitors.create');
-        Volt::route('/perfil', 'company.profile')->name('profile');
+        Route::get('/dashboard', Company\Dashboard\Index::class)->name('dashboard');
+
+        Route::get('/eventos', Company\Events\Index::class)->name('events.index');
+        Route::get('/eventos/{event}/edit', Company\Events\Edit::class)->name('events.edit');
+
+        Route::get('/eventos/funcionarios', Company\Events\Employees::class)->name('events.employees');
+        Route::get('/eventos/visitantes', Company\Events\Visitors::class)->name('events.visitors');
+        Route::get('/eventos/expositores', Company\Events\Exhibitors::class)->name('events.exhibitors');
+
+        Route::get('/funcionarios', Company\Employees\Index::class)->name('employees.index');
+        Route::get('/funcionarios/create', Company\Employees\Create::class)->name('employees.create');
+
+        Route::get('/visitantes', Company\Visitors\Index::class)->name('visitors.index');
+        Route::get('/visitantes/create', Company\Visitors\Create::class)->name('visitors.create');
+
+        Route::get('/expositores', Company\Exhibitors\Index::class)->name('exhibitors.index');
+        Route::get('/expositores/create', Company\Exhibitors\Create::class)->name('exhibitors.create');
+
+        Route::get('/perfil', Company\Profile::class)->name('profile');
+        Route::get('/meu-perfil', Company\MyProfile::class)->name('my-profile');
+        Route::get('/acessos', Company\Access\Index::class)->name('access.index');
     });
 
     Route::prefix('funcionario')->name('employee.')->middleware(['role:' . UserTypeEnum::EMPLOYEE->value])->group(function () {

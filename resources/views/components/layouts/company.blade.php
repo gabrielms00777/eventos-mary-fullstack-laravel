@@ -50,13 +50,26 @@
 
                 <x-menu-item title="Dashboard" icon="o-home" :link="route('company.dashboard')" />
                 <x-menu-item title="Meus Eventos" icon="o-calendar" :link="route('company.events.index')" />
-                <x-menu-item title="Funcionários" icon="o-users" :link="route('company.employees.index')" />
-                <x-menu-item title="Visitantes" icon="o-user-group" :link="route('company.visitors.index')" />
-                <x-menu-item title="Expositores" icon="o-presentation-chart-bar" :link="route('company.exhibitors.index')" />
 
+                <!-- Gerenciar Funcionários e Visitantes -->
+                <x-menu-sub title="Cadastros" icon="o-user-plus">
+                    <x-menu-item title="Funcionários" icon="o-users" :link="route('company.employees.index')" />
+                    <x-menu-item title="Visitantes" icon="o-user-group" :link="route('company.visitors.index')" />
+                    <x-menu-item title="Expositores" icon="o-presentation-chart-bar" :link="route('company.exhibitors.index')" />
+                </x-menu-sub>
+
+                <!-- Gerenciar Participação no Evento -->
+                <x-menu-sub title="Evento Atual" icon="o-calendar-days">
+                    <x-menu-item title="Funcionários no Evento" icon="o-users" :link="route('company.events.employees')" />
+                    <x-menu-item title="Visitantes no Evento" icon="o-user-group" :link="route('company.events.visitors')" />
+                    <x-menu-item title="Expositores no Evento" icon="o-presentation-chart-bar" :link="route('company.events.exhibitors')" />
+                </x-menu-sub>
+
+                <!-- Configurações -->
                 <x-menu-sub title="Configurações" icon="o-cog-6-tooth">
-                    <x-menu-item title="Perfil da Empresa" icon="o-building-office" link="/empresa/perfil" />
-                    <x-menu-item title="Gerenciar Acessos" icon="o-key" link="/empresa/gerenciar-acessos" />
+                    <x-menu-item title="Meu Perfil" icon="o-user" :link="route('company.my-profile')" />
+                    <x-menu-item title="Perfil da Empresa" icon="o-building-office" :link="route('company.profile')" />
+                    <x-menu-item title="Gerenciar Acessos" icon="o-key" :link="route('company.access.index')" />
                 </x-menu-sub>
 
             </x-menu>
